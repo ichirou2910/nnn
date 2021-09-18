@@ -26,7 +26,7 @@
 #define ICON_PICTURES      "\uf753"
 #define ICON_PICTUREFILE   "\uf71e"
 #define ICON_PUBLIC        "\ue5ff"
-#define ICON_TEMPLATES     "\ufac6"
+#define ICON_TEMPLATES     "\uf0c5"
 #define ICON_VIDEOS        "\uf72f"
 #define ICON_VIDEOFILE     "\uf72a"
 #define ICON_CHANGELOG     "\uf7d9"
@@ -148,7 +148,7 @@
 #define ICON_EXT_JPEG      ICON_PICTUREFILE
 #define ICON_EXT_JPG       ICON_PICTUREFILE
 #define ICON_EXT_JS        ICON_JAVASCRIPT
-#define ICON_EXT_JSON      "\ufb25"
+#define ICON_EXT_JSON      "\ue60b"
 #define ICON_EXT_JSX       ICON_REACT
 
 /* K */
@@ -228,7 +228,7 @@
 #define ICON_EXT_TAR       ICON_ARCHIVE
 #define ICON_EXT_TEX       "\uf6fc"
 #define ICON_EXT_TGZ       ICON_ARCHIVE
-#define ICON_EXT_TS        "\ue628"
+#define ICON_EXT_TS        "\ufbe4"
 #define ICON_EXT_TSX       ICON_REACT
 #define ICON_EXT_TXT       ICON_DOCUMENT
 #define ICON_EXT_TXZ       ICON_ARCHIVE

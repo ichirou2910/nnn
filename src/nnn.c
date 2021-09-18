@@ -341,6 +341,7 @@ typedef struct {
 	uint_t cliopener  : 1;  /* All-CLI app opener */
 	uint_t waitedit   : 1;  /* For ops that can't be detached, used EDITOR */
 	uint_t rollover   : 1;  /* Roll over at edges */
+	uint_t lpick      : 2;  /* Use L to pick file */
 } settings;
 
 /* Non-persistent program-internal states (alphabeical order) */
@@ -421,6 +422,7 @@ static settings cfg = {
 	0, /* cliopener */
 	0, /* waitedit */
 	1, /* rollover */
+	2, /* lpick */
 };
 
 static context g_ctx[CTX_MAX] __attribute__ ((aligned));
@@ -693,6 +695,7 @@ static const char * const messages[] = {
 #define NNN_ORDER   11
 #define NNN_HELP    12 /* strings end here */
 #define NNN_TRASH   13 /* flags begin here */
+#define NNN_L_PICK  14
 
 static const char * const env_cfg[] = {
 	"NNN_OPTS",
@@ -709,6 +712,7 @@ static const char * const env_cfg[] = {
 	"NNN_ORDER",
 	"NNN_HELP",
 	"NNN_TRASH",
+	"NNN_L_PICK"
 };
 
 /* Required environment variables */
@@ -6880,6 +6884,10 @@ nochange:
 				goto nochange;
 			}
 
+			// prevent opening here
+			if (cfg.lpick == 1)
+				continue;
+
 			if (cfg.useeditor
 #ifdef FILE_MIME_OPTS
 			    && get_output("file", FILE_MIME_OPTS, newpath, -1, FALSE, FALSE)
@@ -8551,6 +8559,15 @@ int main(int argc, char *argv[])
 	opt = xgetenv_val(env_cfg[NNN_TRASH]);
 	if (opt && opt <= 2)
 		g_state.trash = opt;
+
+	/* Configure pick preference */
+	opt = xgetenv_val(env_cfg[NNN_L_PICK]);
+	if (opt && opt <= 2) {
+		printf("%d\n", opt);
+		cfg.lpick = opt;
+	}
+
+
 
 	/* Ignore/handle certain signals */
 	struct sigaction act = {.sa_handler = sigint_handler};
